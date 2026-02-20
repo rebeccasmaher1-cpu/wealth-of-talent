@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wealth of Talent — Rethink Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,700;1,9..144,800;1,9..144,900&family=General+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --h:'Fraunces','Georgia',serif;
+  --b:'General Sans','Helvetica Neue',sans-serif;
+  --ink:#0f1115;--ink2:#2a2d35;--ink3:#6b7080;--ink4:#9ca3b4;
+  --sand:#f7f3ec;--sand2:#ede7db;--sand3:#dfd6c6;
+  --white:#fffdf9;
+  --sage:#2d4a3e;--sage-l:#e8f0ec;
+  --terra:#8b4513;--terra-l:#fdf0e6;
+  --slate:#334155;
+  --grn:#166534;--grn-bg:#dcfce7;
+  --amb:#854d0e;--amb-bg:#fef9c3;
+  --rd:#991b1b;--rd-bg:#fee2e2;
+  --blu:#1e40af;--blu-bg:#dbeafe;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--b);color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--sand2)}
+
+/* ═══ NAV ═══ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:999;padding:0 clamp(24px,4vw,64px);height:80px;display:flex;align-items:center;justify-content:space-between;transition:all 0.4s}
+.nav.solid{background:rgba(255,253,249,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(0,0,0,0.06)}
+.nav-brand{display:flex;align-items:center;gap:12px}
+.nav-dot{width:10px;height:10px;border-radius:50%;background:var(--sage)}
+.nav-name{font-family:var(--b);font-size:14px;font-weight:600;letter-spacing:-0.02em;color:var(--ink)}
+.nav-right{display:flex;align-items:center;gap:36px}
+.nav-right a{font-size:13px;font-weight:500;color:var(--ink3);text-decoration:none;transition:color 0.2s;letter-spacing:-0.01em}
+.nav-right a:hover{color:var(--ink)}
+
+/* ═══ HERO ═══ */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px clamp(24px,4vw,64px) 80px;position:relative;overflow:hidden;background:var(--white)}
+.hero-bg{position:absolute;inset:0;pointer-events:none}
+.hero-bg::before{content:'';position:absolute;width:min(800px,100vw);height:min(800px,100vw);top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(45,74,62,0.06) 0%,rgba(237,231,219,0.3) 40%,transparent 70%);animation:pulse-slow 8s ease-in-out infinite}
+.hero-bg::after{content:'';position:absolute;width:min(500px,80vw);height:min(500px,80vw);top:55%;left:45%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(139,69,19,0.04) 0%,transparent 60%);animation:pulse-slow 10s ease-in-out 2s infinite}
+@keyframes pulse-slow{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:1}50%{transform:translate(-50%,-50%) scale(1.08);opacity:0.8}}
+.hero-inner{position:relative;z-index:2;max-width:800px}
+.hero-tag{display:inline-block;font-size:12px;font-weight:600;color:var(--sage);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:32px;opacity:0;animation:slideUp 0.8s ease 0.2s forwards}
+.hero h1{font-family:var(--h);font-size:clamp(44px,8vw,96px);font-weight:300;line-height:1.05;letter-spacing:-0.04em;margin-bottom:32px}
+.hero h1 span{display:inline-block;opacity:0;transform:translateY(40px);animation:slideUp 0.9s cubic-bezier(0.16,1,0.3,1) forwards}
+.hero h1 span:nth-child(1){animation-delay:0.1s}
+.hero h1 span:nth-child(2){animation-delay:0.2s}
+.hero h1 span:nth-child(3){animation-delay:0.3s}
+.hero h1 em{font-style:italic;font-weight:300}
+.hero-p{font-size:clamp(16px,1.8vw,20px);font-weight:300;color:var(--ink3);line-height:1.75;max-width:520px;margin:0 auto;opacity:0;animation:slideUp 0.8s ease 0.5s forwards}
+@keyframes slideUp{to{opacity:1;transform:translateY(0)}}
+.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:fadeIn 1s ease 1.5s forwards}
+@keyframes fadeIn{to{opacity:0.3}}
+.hero-scroll span{font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink3)}
+.scroll-bar{width:1px;height:48px;position:relative;overflow:hidden}
+.scroll-bar::after{content:'';position:absolute;top:-100%;left:0;width:1px;height:100%;background:var(--ink);animation:scrollDown 2s ease-in-out infinite}
+@keyframes scrollDown{0%{top:-100%}50%{top:0}100%{top:100%}}
+
+/* ═══ SECTION FRAMEWORK ═══ */
+.s{padding:clamp(80px,12vw,160px) clamp(24px,4vw,64px)}
+.s-inner{max-width:1100px;margin:0 auto}
+.s-white{background:var(--white)}
+.s-sand{background:var(--sand)}
+.s-dark{background:var(--ink);color:var(--sand)}
+.s-sage{background:var(--sage);color:var(--sand)}
+
+.label{font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:20px}
+.s-white .label,.s-sand .label{color:var(--sage)}
+.s-dark .label,.s-sage .label{opacity:0.4}
+.heading{font-family:var(--h);font-size:clamp(32px,5vw,60px);font-weight:300;line-height:1.1;letter-spacing:-0.03em;margin-bottom:20px}
+.heading em{font-style:italic}
+.sub{font-size:clamp(15px,1.5vw,18px);font-weight:300;line-height:1.8;max-width:480px;margin-bottom:64px}
+.s-white .sub,.s-sand .sub{color:var(--ink3)}
+.s-dark .sub,.s-sage .sub{opacity:0.45}
+
+/* ═══ NUMBERS ═══ */
+.numbers{display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding:60px 0;border-top:1px solid var(--sand2);border-bottom:1px solid var(--sand2)}
+.num{text-align:center}
+.num:not(:last-child){border-right:1px solid var(--sand2)}
+.num-v{font-family:var(--h);font-size:clamp(40px,5vw,72px);font-weight:300;letter-spacing:-0.04em;line-height:1;color:var(--sage)}
+.num-l{font-size:13px;color:var(--ink4);margin-top:8px;font-weight:400}
+
+/* ═══ SERVICE LIST ═══ */
+.svc-col{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
+.svc{padding:clamp(24px,3vw,40px) 0;border-bottom:1px solid var(--sand2);display:flex;align-items:baseline;gap:16px;transition:all 0.3s}
+.svc:hover{padding-left:12px}
+.svc:nth-child(odd){padding-right:clamp(24px,3vw,48px);border-right:1px solid var(--sand2)}
+.svc:nth-child(even){padding-left:clamp(24px,3vw,48px)}
+.svc i{font-family:var(--h);font-size:16px;font-style:italic;color:var(--ink4);flex-shrink:0;width:28px}
+.svc span{font-size:clamp(15px,1.5vw,18px);font-weight:500;letter-spacing:-0.02em}
+
+/* ═══ 3-COL PROCESS ═══ */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(32px,4vw,56px)}
+.trio-i .trio-n{font-family:var(--h);font-size:clamp(40px,4vw,64px);font-weight:300;font-style:italic;line-height:1;margin-bottom:20px;opacity:0.15}
+.s-dark .trio-i .trio-n,.s-sage .trio-i .trio-n{opacity:0.12}
+.trio-i h3{font-size:clamp(16px,1.4vw,20px);font-weight:600;margin-bottom:8px;letter-spacing:-0.02em}
+.trio-i p{font-size:14px;font-weight:300;line-height:1.75;opacity:0.6}
+
+/* ═══ VERTICAL STEPS (MODEL) ═══ */
+.vsteps{max-width:600px}
+.vstep{display:grid;grid-template-columns:60px 1fr;gap:clamp(16px,2vw,28px);padding:clamp(32px,4vw,52px) 0;border-bottom:1px solid var(--sand2)}
+.vstep:last-child{border-bottom:none}
+.vstep-n{font-family:var(--h);font-size:clamp(36px,4vw,52px);font-weight:300;font-style:italic;opacity:0.15;line-height:1}
+.vstep h3{font-size:clamp(17px,1.5vw,22px);font-weight:600;margin-bottom:6px;letter-spacing:-0.02em}
+.vstep p{font-size:14px;font-weight:300;line-height:1.75;color:var(--ink3)}
+
+/* ═══ PRINCIPLES ═══ */
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid rgba(237,231,219,0.15)}
+.s-sand .pgrid{border-color:var(--sand2)}
+.pcell{padding:clamp(24px,3vw,40px) clamp(16px,2vw,32px) clamp(24px,3vw,40px) 0;border-bottom:1px solid rgba(237,231,219,0.15)}
+.s-sand .pcell{border-color:var(--sand2)}
+.pcell:not(:nth-child(3n)){border-right:1px solid rgba(237,231,219,0.15);padding-right:clamp(16px,2vw,32px)}
+.s-sand .pcell:not(:nth-child(3n)){border-color:var(--sand2)}
+.pcell:nth-child(3n){padding-left:clamp(16px,2vw,32px)}
+.pcell:nth-child(2){padding-left:clamp(16px,2vw,32px)}
+.pcell:nth-child(5){padding-left:clamp(16px,2vw,32px)}
+.pcell h4{font-size:15px;font-weight:600;margin-bottom:4px;letter-spacing:-0.01em}
+.pcell p{font-size:13px;font-weight:300;line-height:1.65;opacity:0.55}
+
+/* ═══ BILLING ═══ */
+.bcols{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid rgba(237,231,219,0.12)}
+.bcol{padding:clamp(32px,4vw,56px) 0}
+.bcol:first-child{padding-right:clamp(24px,3vw,48px);border-right:1px solid rgba(237,231,219,0.12)}
+.bcol:last-child{padding-left:clamp(24px,3vw,48px)}
+.bcol-t{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;opacity:0.3;margin-bottom:16px}
+.bcol h3{font-family:var(--h);font-size:clamp(24px,3vw,36px);font-weight:300;margin-bottom:12px;letter-spacing:-0.02em}
+.bcol p{font-size:14px;font-weight:300;line-height:1.75;opacity:0.5}
+
+/* ═══ RECRUITMENT EDITORIAL ═══ */
+.rsteps{max-width:640px}
+.rstep{padding:clamp(36px,5vw,64px) 0;border-bottom:1px solid var(--sand2)}
+.rstep:first-child{padding-top:0}
+.rstep:last-child{border-bottom:none}
+.rstep-label{font-family:var(--h);font-size:13px;font-style:italic;color:var(--ink4);margin-bottom:12px}
+.rstep h3{font-size:clamp(18px,2vw,24px);font-weight:600;letter-spacing:-0.02em;margin-bottom:8px}
+.rstep p{font-size:15px;font-weight:300;line-height:1.75;color:var(--ink3);max-width:520px}
+.rstep-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.rstep-tag{font-size:12px;font-weight:500;padding:8px 20px;border-radius:100px;background:var(--sand);color:var(--ink2);border:1px solid var(--sand2);transition:all 0.2s}
+.rstep-tag:hover{background:var(--sand2)}
+
+/* ═══ TOOLKIT ═══ */
+.tkgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--sand2)}
+.tkcell{padding:clamp(20px,3vw,36px) clamp(12px,2vw,28px) clamp(20px,3vw,36px) 0;border-bottom:1px solid var(--sand2)}
+.tkcell:not(:nth-child(3n)){border-right:1px solid var(--sand2);padding-right:clamp(12px,2vw,28px)}
+.tkcell:nth-child(3n){padding-left:clamp(12px,2vw,28px)}
+.tkcell:nth-child(2),.tkcell:nth-child(5){padding-left:clamp(12px,2vw,28px)}
+.tkcell h4{font-size:14px;font-weight:600;margin-bottom:3px}
+.tkcell p{font-size:12px;font-weight:300;line-height:1.6;color:var(--ink3)}
+
+/* ═══ FORECAST ═══ */
+.fbar{display:grid;grid-template-columns:repeat(4,1fr);padding:clamp(32px,4vw,56px) 0;border-bottom:1px solid rgba(237,231,219,0.12);margin-bottom:clamp(32px,4vw,48px)}
+.fbar-i{text-align:center}
+.fbar-i:not(:last-child){border-right:1px solid rgba(237,231,219,0.12)}
+.fbar-v{font-family:var(--h);font-size:clamp(36px,4vw,56px);font-weight:300;line-height:1}
+.fbar-l{font-size:11px;font-weight:500;opacity:0.3;margin-top:6px;letter-spacing:0.05em}
+.fv1{color:var(--sand)}.fv2{color:#4ade80}.fv3{color:#fbbf24}.fv4{color:#f87171}
+
+.fleg{display:flex;gap:24px;margin-bottom:28px}
+.fleg-i{display:flex;align-items:center;gap:7px;font-size:13px;opacity:0.5}
+.fd{width:8px;height:8px;border-radius:50%}
+.fdg{background:#4ade80}.fda{background:#fbbf24}.fdr{background:#f87171}
+
+.ftbl{width:100%;border-collapse:collapse}
+.ftbl thead{border-bottom:2px solid rgba(237,231,219,0.2)}
+.ftbl th{padding:14px 16px 14px 0;text-align:left;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;opacity:0.3}
+.ftbl td{padding:16px 16px 16px 0;font-size:14px;border-bottom:1px solid rgba(237,231,219,0.08)}
+.ftbl tr:last-child td{border-bottom:none}
+.ftbl tr{transition:background 0.2s}
+.ftbl tbody tr:hover{background:rgba(255,255,255,0.03)}
+.fb{font-weight:600;color:var(--sand)}.fr2{opacity:0.6}
+.tp{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:5px 14px;border-radius:100px;cursor:pointer;transition:all 0.2s;user-select:none}
+.tp:hover{opacity:0.7}
+.tp i{width:7px;height:7px;border-radius:50%;display:inline-block}
+.tp.g{color:#166534;background:#dcfce7}.tp.g i{background:#166534}
+.tp.a{color:#854d0e;background:#fef9c3}.tp.a i{background:#854d0e}
+.tp.r{color:#991b1b;background:#fee2e2}.tp.r i{background:#991b1b}
+.pri{font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px}
+.pri-h{color:#fca5a5;background:rgba(252,165,165,0.1)}.pri-m{color:#fcd34d;background:rgba(252,211,77,0.1)}.pri-l{color:#93c5fd;background:rgba(147,197,253,0.1)}
+
+/* ═══ ACTIVITY ═══ */
+.biz{border-bottom:1px solid var(--sand2)}
+.biz:last-child{border-bottom:none}
+.biz-h{padding:clamp(20px,2.5vw,32px) 0;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:opacity 0.2s}
+.biz-h:hover{opacity:0.65}
+.biz-nm{font-size:clamp(16px,1.5vw,20px);font-weight:600;letter-spacing:-0.02em}
+.biz-tg{font-size:11px;font-weight:600;letter-spacing:0.04em;padding:5px 16px;border-radius:100px}
+.bg{color:var(--grn);background:var(--grn-bg)}.ba{color:var(--amb);background:var(--amb-bg)}.bb{color:var(--blu);background:var(--blu-bg)}.bd{color:var(--ink4);background:var(--sand)}
+.biz-bd{max-height:0;overflow:hidden;transition:max-height 0.5s cubic-bezier(0.4,0,0.2,1)}
+.biz.open .biz-bd{max-height:900px}
+.biz-in{padding:0 0 clamp(20px,2.5vw,32px)}
+.biz-sec{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink4);padding:14px 0 6px}
+.biz-sec:first-child{padding-top:0}
+.biz-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0}
+.biz-row span:first-child{font-size:14px;color:var(--ink2);font-weight:400}
+.biz-row .rs{font-size:11px;font-weight:600;padding:4px 14px;border-radius:100px}
+.rsg{color:var(--grn);background:var(--grn-bg)}.rsa{color:var(--amb);background:var(--amb-bg)}.rsb{color:var(--blu);background:var(--blu-bg)}.rsd{color:var(--ink4);background:var(--sand)}
+.biz-empty{font-size:13px;color:var(--ink4);padding:6px 0}
+.biz-arrow{width:20px;height:20px;transition:transform 0.3s}
+.biz.open .biz-arrow{transform:rotate(180deg)}
+
+/* ═══ FOOTER ═══ */
+.foot{background:var(--ink);padding:clamp(64px,8vw,120px) clamp(24px,4vw,64px)}
+.foot-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end}
+.foot h2{font-family:var(--h);font-size:clamp(32px,4vw,52px);font-weight:300;font-style:italic;color:var(--sand);line-height:1.1}
+.foot-r{text-align:right}
+.foot-r p{font-size:13px;color:var(--sand);opacity:0.25;line-height:1.6}
+
+/* ═══ SCROLL REVEAL ═══ */
+.rv{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease}
+.rv.vis{opacity:1;transform:translateY(0)}
+.rv-d1{transition-delay:0.1s}.rv-d2{transition-delay:0.2s}.rv-d3{transition-delay:0.3s}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:900px){
+  .numbers,.fbar{grid-template-columns:repeat(2,1fr)}
+  .num:nth-child(1),.num:nth-child(2){border-bottom:1px solid var(--sand2);padding-bottom:32px}
+  .num:nth-child(3),.num:nth-child(4){padding-top:32px}
+  .num:nth-child(2n){border-right:none}
+  .svc-col{grid-template-columns:1fr}
+  .svc{border-right:none!important;padding-right:0!important;padding-left:0!important}
+  .svc:hover{padding-left:8px}
+  .trio{grid-template-columns:1fr;gap:40px}
+  .pgrid{grid-template-columns:1fr}
+  .pcell{border-right:none!important;padding-left:0!important;padding-right:0!important}
+  .bcols{grid-template-columns:1fr}
+  .bcol{border-right:none!important;padding-left:0!important;padding-right:0!important}
+  .bcol:first-child{border-bottom:1px solid rgba(237,231,219,0.12);padding-bottom:40px}
+  .bcol:last-child{padding-top:40px}
+  .tkgrid{grid-template-columns:1fr}
+  .tkcell{border-right:none!important;padding-left:0!important;padding-right:0!important}
+  .foot-inner{flex-direction:column;align-items:flex-start;gap:24px}
+  .foot-r{text-align:left}
+  .nav-right{gap:16px}
+  .nav-right a{font-size:12px}
+  .fbar-i:nth-child(2n){border-right:none}
+  .fbar-i{padding:16px 0}
+}
+@media(max-width:600px){
+  .numbers,.fbar{grid-template-columns:1fr}
+  .num,.fbar-i{border-right:none!important;border-bottom:1px solid var(--sand2);padding:20px 0!important;text-align:left}
+  .num:last-child,.fbar-i:last-child{border-bottom:none}
+  .nav-right a:nth-child(n+4){display:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-brand"><div class="nav-dot"></div><div class="nav-name">Wealth of Talent</div></div>
+  <div class="nav-right">
+    <a href="#top">Home</a>
+    <a href="#services">Services</a>
+    <a href="#model">Model</a>
+    <a href="#recruitment">Recruitment</a>
+    <a href="#forecast">Forecast</a>
+    <a href="#activity">Activity</a>
+  </div>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">Rethink Group — People & Culture</div>
+    <h1><span>Wealth</span> <span>of</span> <span><em>Talent</em></span></h1>
+    <p class="hero-p">A centralised People & Culture function delivering end-to-end HR and talent services across all ten Rethink Group businesses.</p>
+  </div>
+  <div class="hero-scroll"><span>Scroll</span><div class="scroll-bar"></div></div>
+</section>
+
+<!-- ═══════ NUMBERS ═══════ -->
+<section class="s s-white">
+  <div class="s-inner">
+    <div class="numbers rv">
+      <div class="num"><div class="num-v">10</div><div class="num-l">Businesses served</div></div>
+      <div class="num"><div class="num-v">17</div><div class="num-l">Open roles</div></div>
+      <div class="num"><div class="num-v">8</div><div class="num-l">Service areas</div></div>
+      <div class="num"><div class="num-v">2</div><div class="num-l">Billing models</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SERVICES ═══════ -->
+<section class="s s-sand" id="services">
+  <div class="s-inner">
+    <div class="label rv">Service Offering</div>
+    <h2 class="heading rv">Eight areas of expertise,<br>one <em>centralised</em> team.</h2>
+    <p class="sub rv">Every Rethink Group business has access to the full spectrum of People & Culture services.</p>
+    <div class="svc-col rv">
+      <div class="svc"><i>01</i><span>Talent Acquisition</span></div>
+      <div class="svc"><i>02</i><span>People Operations</span></div>
+      <div class="svc"><i>03</i><span>Compensation & Reward</span></div>
+      <div class="svc"><i>04</i><span>Compliance</span></div>
+      <div class="svc"><i>05</i><span>Performance</span></div>
+      <div class="svc"><i>06</i><span>Learning & Development</span></div>
+      <div class="svc"><i>07</i><span>Culture & Engagement</span></div>
+      <div class="svc"><i>08</i><span>Employee Relations</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ HOW IT WORKS ═══════ -->
+<section class="s s-dark">
+  <div class="s-inner">
+    <div class="label rv">How It Works</div>
+    <h2 class="heading rv">Three steps from<br>need to <em>delivery.</em></h2>
+    <p class="sub rv">Managing Directors and Heads of engage People & Culture through a structured proposal and delivery process.</p>
+    <div class="trio rv">
+      <div class="trio-i"><div class="trio-n">01</div><h3>Scope & Proposal</h3><p>P&C scopes the engagement and prepares a proposal outlining services, timeline, and costs. Either time & materials or project-based.</p></div>
+      <div class="trio-i"><div class="trio-n">02</div><h3>Sign via Ignition</h3><p>Internal client e-signs through Ignition. Invoice raised on Xero. Direct costs such as advertising passed through at cost.</p></div>
+      <div class="trio-i"><div class="trio-n">03</div><h3>Deliver & Report</h3><p>P&C delivers the work and reports progress back to the Managing Director or Head of.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ THE MODEL ═══════ -->
+<section class="s s-white" id="model">
+  <div class="s-inner">
+    <div class="label rv">The Model</div>
+    <h2 class="heading rv">From need to <em>delivery</em><br>in five steps.</h2>
+    <div class="vsteps rv">
+      <div class="vstep"><div class="vstep-n">01</div><div><h3>Identify Need</h3><p>MD or Head of identifies a recruitment or HR need within their business.</p></div></div>
+      <div class="vstep"><div class="vstep-n">02</div><div><h3>Scope & Proposal</h3><p>P&C scopes the engagement and prepares a proposal with services, timeline, and costs.</p></div></div>
+      <div class="vstep"><div class="vstep-n">03</div><div><h3>Sign via Ignition</h3><p>Internal client e-signs the proposal through Ignition. Invoice raised on Xero.</p></div></div>
+      <div class="vstep"><div class="vstep-n">04</div><div><h3>Deliver</h3><p>P&C delivers the work — sourcing, screening, HR projects — against the agreed scope.</p></div></div>
+      <div class="vstep"><div class="vstep-n">05</div><div><h3>Report</h3><p>Progress reported to the MD or Head of with full transparency on delivery and cost.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PRINCIPLES ═══════ -->
+<section class="s s-sand">
+  <div class="s-inner">
+    <div class="label rv">Principles</div>
+    <h2 class="heading rv">What makes <em>it</em> work.</h2>
+    <div class="sub rv"></div>
+    <div class="pgrid rv">
+      <div class="pcell"><h4>Centralised Function</h4><p>One P&C team serves all ten businesses. Consistency, reduced cost, institutional knowledge.</p></div>
+      <div class="pcell"><h4>Proposal-Based</h4><p>Every engagement starts with a scoped proposal. Leaders know exactly what they're getting.</p></div>
+      <div class="pcell"><h4>E-Signature via Ignition</h4><p>Proposals e-signed through Ignition. Invoices on Xero. Full audit trail.</p></div>
+      <div class="pcell"><h4>Scalable Capacity</h4><p>One hire or a full workforce build-out — P&C scales to match demand.</p></div>
+      <div class="pcell"><h4>Group-Wide Visibility</h4><p>MDs and Heads of see workforce planning and HR initiatives across the group.</p></div>
+      <div class="pcell"><h4>Leaders Stay Focused</h4><p>P&C handles end-to-end so leaders focus on running their business.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ BILLING ═══════ -->
+<section class="s s-sage">
+  <div class="s-inner">
+    <div class="label rv">Billing</div>
+    <h2 class="heading rv">Two ways to <em>engage.</em></h2>
+    <p class="sub rv">Depending on the nature of the work.</p>
+    <div class="bcols rv">
+      <div class="bcol"><div class="bcol-t">Model A</div><h3>Time & Materials</h3><p>Billed on hours worked plus direct costs at cost. Best for ongoing recruitment, advisory, and HR services where scope may evolve.</p></div>
+      <div class="bcol"><div class="bcol-t">Model B</div><h3>Project-Based</h3><p>Fixed scope, defined deliverable, timeline, and cost. Best for compliance audits, frameworks, and cultural strategy.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ RECRUITMENT ═══════ -->
+<section class="s s-white" id="recruitment">
+  <div class="s-inner">
+    <div class="label rv">Recruitment Process</div>
+    <h2 class="heading rv">Five stages,<br>one <em>standard.</em></h2>
+    <p class="sub rv">Standardised end-to-end recruitment for every hire across the group.</p>
+    <div class="rsteps rv">
+      <div class="rstep"><div class="rstep-label">Step One</div><h3>Position Description & Job Advert</h3><p>Draft PD and Job Ad using standardised templates. P&C reviews for layout, content, and consistency before the role goes live.</p><div class="rstep-tags"><span class="rstep-tag">Job Ad Template</span><span class="rstep-tag">PD Template</span><span class="rstep-tag">Completed PD Example</span></div></div>
+      <div class="rstep"><div class="rstep-label">Step Two</div><h3>Job Advert Platform</h3><p>Roles promoted via Rethink Group LinkedIn (3 free ad slots per subscription). P&C posts on behalf and forwards all applicants.</p><div class="rstep-tags"><span class="rstep-tag">LinkedIn Posting</span><span class="rstep-tag">Applicant Forwarding</span></div></div>
+      <div class="rstep"><div class="rstep-label">Step Three</div><h3>Option to Engage an Agency</h3><p>P&C can engage a recruitment agency if needed. Agency costs passed through at cost.</p><div class="rstep-tags"><span class="rstep-tag">Agency Briefing</span><span class="rstep-tag">Cost Pass-Through</span></div></div>
+      <div class="rstep"><div class="rstep-label">Step Four</div><h3>Probation Review</h3><p>Business follows the probation review process and templates. P&C can sit in on meetings and assist throughout.</p><div class="rstep-tags"><span class="rstep-tag">Probation Templates</span><span class="rstep-tag">Onboarding Pack</span></div></div>
+      <div class="rstep"><div class="rstep-label">Step Five</div><h3>End-to-End HR Assistance</h3><p>P&C manages sourcing, screening, and shortlisting so hiring managers stay focused.</p><div class="rstep-tags"><span class="rstep-tag">Reference Check</span><span class="rstep-tag">Interview Guide</span><span class="rstep-tag">Hiring Manager Training</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ TOOLKIT ═══════ -->
+<section class="s s-sand">
+  <div class="s-inner">
+    <div class="label rv">Toolkit</div>
+    <h2 class="heading rv">Templates & <em>resources.</em></h2>
+    <div class="sub rv"></div>
+    <div class="tkgrid rv">
+      <div class="tkcell"><h4>Job Ad Template</h4><p>Standardised ad ensuring brand consistency across all roles.</p></div>
+      <div class="tkcell"><h4>Position Description</h4><p>Role overview, responsibilities, requirements, and success criteria.</p></div>
+      <div class="tkcell"><h4>Completed PD Example</h4><p>A worked example showing a finished Position Description.</p></div>
+      <div class="tkcell"><h4>Reference Check</h4><p>Structured questionnaire for consistent candidate verification.</p></div>
+      <div class="tkcell"><h4>Interview Guide</h4><p>Competency-based questions and scoring framework.</p></div>
+      <div class="tkcell"><h4>Hiring Manager Training</h4><p>Presentation on the recruitment process and best practices.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FORECAST ═══════ -->
+<section class="s s-dark" id="forecast">
+  <div class="s-inner">
+    <div class="label rv">Workforce Forecast</div>
+    <h2 class="heading rv">Recruitment <em>pipeline.</em></h2>
+    <p class="sub rv">All open and planned hires across the group. Click any status to cycle it.</p>
+    <div class="fbar rv">
+      <div class="fbar-i"><div class="fbar-v fv1">17</div><div class="fbar-l">Total</div></div>
+      <div class="fbar-i"><div class="fbar-v fv2" id="cg">0</div><div class="fbar-l">Started</div></div>
+      <div class="fbar-i"><div class="fbar-v fv3" id="ca">0</div><div class="fbar-l">Pending</div></div>
+      <div class="fbar-i"><div class="fbar-v fv4" id="cr">0</div><div class="fbar-l">Not Started</div></div>
+    </div>
+    <div class="fleg rv">
+      <div class="fleg-i"><div class="fd fdg"></div>Started</div>
+      <div class="fleg-i"><div class="fd fda"></div>Pending</div>
+      <div class="fleg-i"><div class="fd fdr"></div>Not Started</div>
+    </div>
+    <div class="rv"><table class="ftbl"><thead><tr><th>Business</th><th>Role</th><th>Priority</th><th>Status</th></tr></thead><tbody id="fb"></tbody></table></div>
+  </div>
+</section>
+
+<!-- ═══════ ACTIVITY ═══════ -->
+<section class="s s-white" id="activity">
+  <div class="s-inner">
+    <div class="label rv">Activity</div>
+    <h2 class="heading rv">What's happening<br>across <em>all ten.</em></h2>
+    <p class="sub rv">HR services and recruitment currently in progress across every Rethink Group business.</p>
+    <div class="rv" id="blist"></div>
+  </div>
+</section>
+
+<footer class="foot"><div class="foot-inner">
+  <h2>Wealth of<br><em>Talent</em></h2>
+  <div class="foot-r"><p>Rethink Group<br>People & Culture Shared Service</p></div>
+</div></footer>
+
+<script>
+// Nav solid on scroll
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('solid',window.scrollY>80));
+
+// Scroll reveal
+const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:0.12});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+// Activity
+const bizData=[
+  {n:'Rethink Group',t:'Active',tc:'bg',hr:['AML Compliance|rsg','Intranet|rsg','Compliance Audit|rsg','Cultural Strategy|rsg','Manager Support & Training|rsg','Performance Management|rsg','Career Development / Levels|rsg','Employee Benefits|rsg','Salary Reviews|rsg','Professional Development (KPIs)|rsg','Career Level Framework|rsg'],rec:['Project Delivery Manager|rsg','CRM Specialist|rsa','Marketing Assistant|rsg','Financial Controller|rsg']},
+  {n:'Rethink Capital',t:'Active',tc:'bg',hr:['Contracts Managers|rsg'],rec:['Compliance Manager|rsg','Asset Manager|rsg','Investor Relations Reps|rsg']},
+  {n:'Rethink Investing',t:'Active',tc:'bg',hr:[],rec:['Acquisitions Specialist|rsg','Associate Buyers Advocate|rsg','Senior Buyers Advocate|rsg','Admin / PA|rsa']},
+  {n:'Rethink Financing',t:'FY26 Q4',tc:'bg',hr:['Contracts Audit / Compliance|rsg','Performance Plans / Development|rsg'],rec:[]},
+  {n:'Rethink Property Insurance',t:'Active',tc:'bg',hr:[],rec:['Senior Account Executive|rsg']},
+  {n:'Rethink Wealth',t:'Pending',tc:'ba',hr:[],rec:['FP Hire|rsa']},
+  {n:'Rethink Residential',t:'Active',tc:'bg',hr:[],rec:['Senior Buyers Advocates|rsg']},
+  {n:'Rethink AI',t:'Active',tc:'bg',hr:[],rec:['Engineer|rsb','AI Solution Specialist|rsg']},
+  {n:'Rethink Renewables',t:'Scoping',tc:'bb',hr:[],rec:['TBC — Needs identified|rsb']},
+  {n:'Rethink Property Lawyers',t:'2027',tc:'bd',hr:[],rec:['Deferred to 2027|rsd']},
+];
+const stL={rsg:'Active',rsa:'Pending',rsb:'Scoping',rsd:'Deferred'};
+const bl=document.getElementById('blist');
+bizData.forEach((b,i)=>{
+  let rows='<div class="biz-sec">HR Services</div>';
+  if(!b.hr.length)rows+='<div class="biz-empty">No active HR services</div>';
+  b.hr.forEach(r=>{const[nm,s]=r.split('|');rows+=`<div class="biz-row"><span>${nm}</span><span class="rs ${s}">${stL[s]}</span></div>`});
+  rows+='<div class="biz-sec">Recruitment</div>';
+  if(!b.rec.length)rows+='<div class="biz-empty">No active recruitment</div>';
+  b.rec.forEach(r=>{const[nm,s]=r.split('|');rows+=`<div class="biz-row"><span>${nm}</span><span class="rs ${s}">${stL[s]||'Deferred'}</span></div>`});
+  const d=document.createElement('div');d.className='biz'+(i<2?' open':'');
+  d.innerHTML=`<div class="biz-h" onclick="this.parentElement.classList.toggle('open')"><div class="biz-nm">${b.n}</div><div style="display:flex;align-items:center;gap:12px"><div class="biz-tg ${b.tc}">${b.t}</div><svg class="biz-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 8l5 5 5-5"/></svg></div></div><div class="biz-bd"><div class="biz-in">${rows}</div></div>`;
+  bl.appendChild(d);
+});
+
+// Forecast
+const D=[
+  {b:'Rethink Group',r:'Project Delivery Manager',p:'medium',s:'green'},
+  {b:'Rethink Group',r:'CRM Specialist',p:'medium',s:'red'},
+  {b:'Rethink Group',r:'Marketing Assistant',p:'high',s:'green'},
+  {b:'Rethink Group',r:'Financial Controller',p:'high',s:'green'},
+  {b:'Rethink Investing',r:'Acquisitions Specialist',p:'medium',s:'green'},
+  {b:'Rethink Investing',r:'Associate Buyers Advocate',p:'medium',s:'green'},
+  {b:'Rethink Investing',r:'Senior Buyers Advocate',p:'high',s:'green'},
+  {b:'Rethink Investing',r:'Admin / PA',p:'medium',s:'amber'},
+  {b:'Rethink Property Insurance',r:'Senior Account Executive',p:'high',s:'green'},
+  {b:'Rethink Wealth',r:'FP Hire',p:'medium',s:'amber'},
+  {b:'Rethink Residential',r:'Senior Buyers Advocates',p:'high',s:'green'},
+  {b:'Rethink Renewables',r:'TBC',p:'low',s:'red'},
+  {b:'Rethink AI',r:'Engineer',p:'low',s:'red'},
+  {b:'Rethink AI',r:'AI Solution Specialist',p:'low',s:'green'},
+  {b:'Rethink Capital',r:'Compliance Manager',p:'high',s:'green'},
+  {b:'Rethink Capital',r:'Asset Manager',p:'high',s:'green'},
+  {b:'Rethink Capital',r:'Investor Relations Reps',p:'high',s:'green'},
+];
+const SL={green:'Started',amber:'Pending',red:'Not Started'},PL={high:'High',medium:'Medium',low:'Low'};
+function render(){
+  const tb=document.getElementById('fb');tb.innerHTML='';let c={green:0,amber:0,red:0};
+  D.forEach((d,i)=>{c[d.s]++;const tr=document.createElement('tr');
+    tr.innerHTML=`<td><span class="fb">${d.b}</span></td><td><span class="fr2">${d.r}</span></td><td><span class="pri pri-${d.p[0]}">${PL[d.p]}</span></td><td><span class="tp ${d.s[0]}" onclick="cyc(${i})"><i></i>${SL[d.s]}</span></td>`;
+    tb.appendChild(tr)});
+  document.getElementById('cg').textContent=c.green;document.getElementById('ca').textContent=c.amber;document.getElementById('cr').textContent=c.red;
+}
+function cyc(i){const o=['red','amber','green'];D[i].s=o[(o.indexOf(D[i].s)+1)%3];render()}
+render();
+</script>
+</body>
+</html>
